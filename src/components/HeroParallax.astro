@@ -6,9 +6,9 @@ import species from '../assets/hero/layer-03-species.png';
 ---
 <section id="hero" class="relative h-[100vh] min-h-[560px] overflow-hidden">
   <div class="absolute inset-0 h-[120%] w-full">
-    <Image data-layer="01-mainbg" src={mainbg} alt="" width={mainbg.width} height={mainbg.height} class="absolute inset-0 h-full w-[110%] -translate-x-[5%] object-cover" loading="eager" />
-    <Image data-layer="02-grass" src={grass} alt="" width={grass.width} height={grass.height} class="absolute inset-x-0 bottom-0 h-auto w-[110%] -translate-x-[5%] object-contain" loading="eager" />
-    <Image data-layer="03-species" src={species} alt="" width={species.width} height={species.height} class="absolute inset-x-0 top-1/2 h-auto w-[110%] -translate-x-[5%] -translate-y-1/2 object-contain" loading="eager" />
+    <Image data-layer="01-mainbg" src={mainbg} alt="" width={mainbg.width} height={mainbg.height} class="absolute left-1/2 top-0 h-full w-[110%] -translate-x-1/2 object-cover" loading="eager" />
+    <Image data-layer="02-grass" src={grass} alt="" width={grass.width} height={grass.height} class="absolute left-1/2 bottom-0 h-auto w-[110%] -translate-x-1/2 object-contain" loading="eager" />
+    <Image data-layer="03-species" src={species} alt="" width={species.width} height={species.height} class="absolute left-1/2 top-1/2 h-auto w-[110%] -translate-x-1/2 -translate-y-1/2 object-contain" loading="eager" />
   </div>
 
   <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-(--color-bg) via-(--color-bg)/60 to-transparent"></div>
@@ -58,20 +58,11 @@ import species from '../assets/hero/layer-03-species.png';
         },
       });
     });
-
-    gsap.to('[data-layer="02-grass"]', {
-      xPercent: 1.5,
-      repeat: -1,
-      yoyo: true,
-      duration: 12,
-      ease: 'sine.inOut',
-    });
   }
 
   initHero();
   document.addEventListener('astro:page-load', () => {
     ScrollTrigger.getAll().forEach((t) => t.kill());
-    gsap.killTweensOf('[data-layer="02-grass"]');
     initHero();
   });
 </script>
