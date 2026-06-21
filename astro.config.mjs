@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -21,5 +21,12 @@ export default defineConfig({
     remarkPlugins: [remarkReadingTime]
   },
 
-  integrations: [mdx(), sitemap()]
+  integrations: [mdx(), sitemap()],
+
+  // Self-hosted at build time — swap `name` here (and the matching
+  // --font-* variable in src/styles/global.css) to change typefaces.
+  fonts: [
+    { provider: fontProviders.google(), name: 'Cutive', cssVariable: '--font-cutive' },
+    { provider: fontProviders.google(), name: 'Instrument Sans', cssVariable: '--font-instrument-sans' }
+  ]
 });
