@@ -1,0 +1,83 @@
+---
+import { Image } from 'astro:assets';
+import sky from '../assets/hero/layer-01-sky.png';
+import far from '../assets/hero/layer-02-far.png';
+import mid from '../assets/hero/layer-03-mid.png';
+import near from '../assets/hero/layer-04-near.png';
+import focal from '../assets/hero/layer-05-focal.png';
+---
+<section id="hero" class="relative h-[100vh] min-h-[560px] overflow-hidden">
+  <div class="absolute inset-0 h-[120%] w-full">
+    <Image data-layer="01-sky" src={sky} alt="" width={2400} height={1400} class="absolute inset-0 h-full w-[110%] -translate-x-[5%] object-cover" loading="eager" />
+    <Image data-layer="02-far" src={far} alt="" width={2400} height={1400} class="absolute inset-0 h-full w-[110%] -translate-x-[5%] object-cover" loading="eager" />
+    <Image data-layer="03-mid" src={mid} alt="" width={2400} height={1400} class="absolute inset-0 h-full w-[110%] -translate-x-[5%] object-cover" loading="eager" />
+    <Image data-layer="04-near" src={near} alt="" width={2400} height={1400} class="absolute inset-0 h-full w-[110%] -translate-x-[5%] object-cover" loading="eager" />
+    <Image data-layer="05-focal" src={focal} alt="" width={2400} height={1400} class="absolute inset-0 h-full w-[110%] -translate-x-[5%] object-cover" loading="eager" />
+  </div>
+
+  <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-(--color-bg) via-(--color-bg)/60 to-transparent"></div>
+
+  <div class="relative z-10 flex h-full flex-col items-start justify-end px-6 pb-20 sm:px-12 sm:pb-28">
+    <div class="mx-auto w-full max-w-4xl">
+      <h1 class="font-display text-4xl font-bold tracking-tight text-(--color-fg) drop-shadow-sm sm:text-6xl">
+        Muhammed Shah
+      </h1>
+      <p class="mt-4 max-w-xl text-lg text-(--color-fg)/90 drop-shadow-sm">
+        Notes on building, breaking, and learning — one post at a time.
+      </p>
+      <a
+        href="/posts"
+        class="mt-8 inline-flex items-center gap-2 rounded-full bg-(--color-accent) px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-(--color-accent-hover)"
+      >
+        Read the posts &rarr;
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initHero() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!document.getElementById('hero')) return;
+
+    const layers: { sel: string; y: number }[] = [
+      { sel: '[data-layer="02-far"]', y: -40 },
+      { sel: '[data-layer="03-mid"]', y: -90 },
+      { sel: '[data-layer="04-near"]', y: -160 },
+      { sel: '[data-layer="05-focal"]', y: -220 },
+    ];
+
+    layers.forEach(({ sel, y }) => {
+      gsap.to(sel, {
+        yPercent: y / 10,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+    });
+
+    gsap.to('[data-layer="02-far"]', {
+      xPercent: 1.5,
+      repeat: -1,
+      yoyo: true,
+      duration: 12,
+      ease: 'sine.inOut',
+    });
+  }
+
+  initHero();
+  document.addEventListener('astro:page-load', () => {
+    ScrollTrigger.getAll().forEach((t) => t.kill());
+    gsap.killTweensOf('[data-layer="02-far"]');
+    initHero();
+  });
+</script>

@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from './BaseLayout.astro';
+import PostMeta from '../components/PostMeta.astro';
+import OtherArticles from '../components/OtherArticles.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  minutesRead: string;
+}
+
+const { post, minutesRead } = Astro.props;
+const { title, description, thumbnail, thumbnailAlt, pubDate, author, tags } = post.data;
+---
+<BaseLayout title={title} description={description}>
+  <article>
+    <header class="mx-auto max-w-3xl px-4 pt-10 sm:px-6">
+      <h1 class="font-display text-3xl font-bold tracking-tight sm:text-5xl">{title}</h1>
+      <PostMeta pubDate={pubDate} minutesRead={minutesRead} author={author} class="mt-4" />
+      {tags.length > 0 && (
+        <div class="mt-4 flex flex-wrap gap-2">
+          {tags.map((tag: string) => (
+            <span class="rounded-full bg-(--color-surface) px-3 py-1 text-xs font-medium text-(--color-muted)">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="mx-auto mt-8 max-w-4xl px-4 sm:px-6">
+      <Image
+        src={thumbnail}
+        alt={thumbnailAlt}
+        width={1600}
+        height={900}
+        class="aspect-[16/9] w-full rounded-2xl object-cover"
+      />
+    </div>
+
+    <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+      <div class="prose dark:prose-invert prose-headings:font-display max-w-none">
+        <slot />
+      </div>
+    </div>
+  </article>
+
+  <OtherArticles currentId={post.id} />
+</BaseLayout>

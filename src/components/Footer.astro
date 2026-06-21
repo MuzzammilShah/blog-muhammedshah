@@ -1,0 +1,12 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-(--color-border) mt-16">
+  <div class="mx-auto flex max-w-4xl flex-col items-center justify-between gap-3 px-4 py-8 text-sm text-(--color-muted) sm:flex-row sm:px-6">
+    <p>&copy; {year} Muhammed Shah. All rights reserved.</p>
+    <div class="flex items-center gap-4">
+      <a href="/posts" class="hover:text-(--color-fg) transition-colors">Posts</a>
+      <a href="/rss.xml" class="hover:text-(--color-fg) transition-colors">RSS</a>
+    </div>
+  </div>
+</footer>

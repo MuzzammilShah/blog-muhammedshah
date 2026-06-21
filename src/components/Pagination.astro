@@ -1,0 +1,33 @@
+---
+interface Props {
+  prevUrl?: string;
+  nextUrl?: string;
+  currentPage: number;
+  lastPage: number;
+}
+
+const { prevUrl, nextUrl, currentPage, lastPage } = Astro.props;
+---
+<nav class="mt-12 flex items-center justify-between" aria-label="Pagination">
+  {prevUrl ? (
+    <a href={prevUrl} class="rounded-full border border-(--color-border) px-4 py-2 text-sm font-medium hover:bg-(--color-surface) transition-colors">
+      &larr; Previous
+    </a>
+  ) : (
+    <span class="rounded-full border border-(--color-border) px-4 py-2 text-sm font-medium text-(--color-muted) opacity-50" aria-disabled="true">
+      &larr; Previous
+    </span>
+  )}
+
+  <span class="text-sm text-(--color-muted)">Page {currentPage} of {lastPage}</span>
+
+  {nextUrl ? (
+    <a href={nextUrl} class="rounded-full border border-(--color-border) px-4 py-2 text-sm font-medium hover:bg-(--color-surface) transition-colors">
+      Next &rarr;
+    </a>
+  ) : (
+    <span class="rounded-full border border-(--color-border) px-4 py-2 text-sm font-medium text-(--color-muted) opacity-50" aria-disabled="true">
+      Next &rarr;
+    </span>
+  )}
+</nav>

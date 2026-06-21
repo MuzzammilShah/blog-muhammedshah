@@ -1,0 +1,23 @@
+---
+interface Props {
+  pubDate: Date;
+  minutesRead?: string;
+  author?: string;
+  class?: string;
+}
+
+const { pubDate, minutesRead, author, class: className } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+<div class:list={['flex flex-wrap items-center gap-x-2 text-sm text-(--color-muted)', className]}>
+  {author && <span>{author}</span>}
+  {author && <span aria-hidden="true">&middot;</span>}
+  <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+  {minutesRead && <span aria-hidden="true">&middot;</span>}
+  {minutesRead && <span>{minutesRead}</span>}
+</div>

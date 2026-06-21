@@ -1,0 +1,18 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+<header
+  id="site-header"
+  class="sticky top-0 z-50 border-b border-(--color-border) bg-(--color-bg)/80 backdrop-blur supports-[backdrop-filter]:bg-(--color-bg)/60"
+>
+  <div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-4 sm:px-6">
+    <a href="/" class="font-display text-lg font-semibold tracking-tight hover:text-(--color-accent) transition-colors">
+      Muhammed Shah
+    </a>
+    <nav class="flex items-center gap-6">
+      <a href="/" class="text-sm font-medium text-(--color-muted) hover:text-(--color-fg) transition-colors">Home</a>
+      <a href="/posts" class="text-sm font-medium text-(--color-muted) hover:text-(--color-fg) transition-colors">Posts</a>
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>
