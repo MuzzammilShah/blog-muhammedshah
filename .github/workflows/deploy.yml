@@ -1,9 +1,7 @@
 name: Deploy to GitHub Pages
 on:
-  # Push-trigger disabled while the site is still in local development.
-  # Uncomment the two lines below to auto-deploy on every push to main.
-  # push:
-  #   branches: [main]
+  push:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
