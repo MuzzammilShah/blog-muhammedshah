@@ -42,11 +42,13 @@ const ogImage = image ? new URL(image, Astro.site).toString() : undefined;
 
     <script is:inline>
       (function () {
-        const stored = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (stored === 'dark' || (!stored && prefersDark)) {
-          document.documentElement.classList.add('dark');
+        function applyTheme(doc) {
+          const stored = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          doc.documentElement.classList.toggle('dark', stored === 'dark' || (!stored && prefersDark));
         }
+        applyTheme(document);
+        document.addEventListener('astro:before-swap', (e) => applyTheme(e.newDocument));
       })();
     </script>
 

@@ -1,18 +1,14 @@
 ---
 import { Image } from 'astro:assets';
-import sky from '../assets/hero/layer-01-sky.png';
-import far from '../assets/hero/layer-02-far.png';
-import mid from '../assets/hero/layer-03-mid.png';
-import near from '../assets/hero/layer-04-near.png';
-import focal from '../assets/hero/layer-05-focal.png';
+import mainbg from '../assets/hero/layer-01-mainbg.jpg';
+import grass from '../assets/hero/layer-02-grass.png';
+import species from '../assets/hero/layer-03-species.png';
 ---
 <section id="hero" class="relative h-[100vh] min-h-[560px] overflow-hidden">
   <div class="absolute inset-0 h-[120%] w-full">
-    <Image data-layer="01-sky" src={sky} alt="" width={2400} height={1400} class="absolute inset-0 h-full w-[110%] -translate-x-[5%] object-cover" loading="eager" />
-    <Image data-layer="02-far" src={far} alt="" width={2400} height={1400} class="absolute inset-0 h-full w-[110%] -translate-x-[5%] object-cover" loading="eager" />
-    <Image data-layer="03-mid" src={mid} alt="" width={2400} height={1400} class="absolute inset-0 h-full w-[110%] -translate-x-[5%] object-cover" loading="eager" />
-    <Image data-layer="04-near" src={near} alt="" width={2400} height={1400} class="absolute inset-0 h-full w-[110%] -translate-x-[5%] object-cover" loading="eager" />
-    <Image data-layer="05-focal" src={focal} alt="" width={2400} height={1400} class="absolute inset-0 h-full w-[110%] -translate-x-[5%] object-cover" loading="eager" />
+    <Image data-layer="01-mainbg" src={mainbg} alt="" width={mainbg.width} height={mainbg.height} class="absolute inset-0 h-full w-[110%] -translate-x-[5%] object-cover" loading="eager" />
+    <Image data-layer="02-grass" src={grass} alt="" width={grass.width} height={grass.height} class="absolute inset-x-0 bottom-0 h-auto w-[110%] -translate-x-[5%] object-contain" loading="eager" />
+    <Image data-layer="03-species" src={species} alt="" width={species.width} height={species.height} class="absolute inset-x-0 top-1/2 h-auto w-[110%] -translate-x-[5%] -translate-y-1/2 object-contain" loading="eager" />
   </div>
 
   <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-(--color-bg) via-(--color-bg)/60 to-transparent"></div>
@@ -46,10 +42,8 @@ import focal from '../assets/hero/layer-05-focal.png';
     if (!document.getElementById('hero')) return;
 
     const layers: { sel: string; y: number }[] = [
-      { sel: '[data-layer="02-far"]', y: -40 },
-      { sel: '[data-layer="03-mid"]', y: -90 },
-      { sel: '[data-layer="04-near"]', y: -160 },
-      { sel: '[data-layer="05-focal"]', y: -220 },
+      { sel: '[data-layer="02-grass"]', y: -40 },
+      { sel: '[data-layer="03-species"]', y: -90 },
     ];
 
     layers.forEach(({ sel, y }) => {
@@ -65,7 +59,7 @@ import focal from '../assets/hero/layer-05-focal.png';
       });
     });
 
-    gsap.to('[data-layer="02-far"]', {
+    gsap.to('[data-layer="02-grass"]', {
       xPercent: 1.5,
       repeat: -1,
       yoyo: true,
@@ -77,7 +71,7 @@ import focal from '../assets/hero/layer-05-focal.png';
   initHero();
   document.addEventListener('astro:page-load', () => {
     ScrollTrigger.getAll().forEach((t) => t.kill());
-    gsap.killTweensOf('[data-layer="02-far"]');
+    gsap.killTweensOf('[data-layer="02-grass"]');
     initHero();
   });
 </script>

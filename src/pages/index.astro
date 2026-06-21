@@ -14,7 +14,7 @@ const recent = allPosts.slice(0, 6);
 <BaseLayout title="Home" description="Notes on building, breaking, and learning — one post at a time.">
   <HeroParallax />
 
-  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6" data-reveal>
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 motion-safe:opacity-0" data-reveal>
     <h2 class="font-display text-3xl font-bold tracking-tight">Welcome</h2>
     <p class="mt-4 max-w-2xl text-(--color-muted)">
       This is where I write about the things I build and the things I learn along the way.
@@ -23,7 +23,7 @@ const recent = allPosts.slice(0, 6);
   </section>
 
   {featured.length > 0 && (
-    <section class="mx-auto max-w-4xl px-4 py-8 sm:px-6" data-reveal>
+    <section class="mx-auto max-w-4xl px-4 py-8 sm:px-6 motion-safe:opacity-0" data-reveal>
       <h2 class="font-display text-2xl font-semibold">Featured</h2>
       <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {featured.map((post) => <PostCard post={post} />)}
@@ -31,7 +31,7 @@ const recent = allPosts.slice(0, 6);
     </section>
   )}
 
-  <section class="mx-auto max-w-4xl px-4 py-8 sm:px-6" data-reveal>
+  <section class="mx-auto max-w-4xl px-4 py-8 sm:px-6 motion-safe:opacity-0" data-reveal>
     <div class="flex items-center justify-between">
       <h2 class="font-display text-2xl font-semibold">Latest posts</h2>
       <a href="/posts" class="text-sm font-medium text-(--color-accent) hover:text-(--color-accent-hover) transition-colors">
@@ -44,27 +44,55 @@ const recent = allPosts.slice(0, 6);
   </section>
 </BaseLayout>
 
+<script is:inline>
+  // Hard fallback: if the GSAP reveal script never runs (slow/cold module
+  // load, error, etc.), don't leave real content permanently invisible.
+  setTimeout(() => {
+    document.querySelectorAll('[data-reveal]').forEach((el) => {
+      el.style.opacity = '1';
+    });
+  }, 2000);
+</script>
+
 <script>
   import gsap from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
   gsap.registerPlugin(ScrollTrigger);
 
-  function initReveals() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function revealNow(el: Element) {
+    gsap.set(el, { clearProps: 'opacity,transform' });
+  }
 
-    document.querySelectorAll('[data-reveal]').forEach((el) => {
-      gsap.from(el, {
-        opacity: 0,
-        y: 32,
+  function initReveals() {
+    const elements = document.querySelectorAll<HTMLElement>('[data-reveal]');
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      elements.forEach(revealNow);
+      return;
+    }
+
+    elements.forEach((el) => {
+      gsap.set(el, { opacity: 0, y: 32 });
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
         duration: 0.6,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
           start: 'top 85%',
+          once: true,
+          onRefresh: (self) => {
+            if (self.progress === 1) revealNow(el);
+          },
         },
       });
     });
+
+    // Safety net: if ScrollTrigger ever mismeasures (e.g. slow first load),
+    // never leave real content permanently invisible.
+    setTimeout(() => ScrollTrigger.refresh(), 1000);
   }
 
   initReveals();

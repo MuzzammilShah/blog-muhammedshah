@@ -17,7 +17,9 @@
 <script>
   function initThemeToggle() {
     const btn = document.getElementById('theme-toggle');
-    btn?.addEventListener('click', () => {
+    if (!btn || btn.dataset.bound) return;
+    btn.dataset.bound = 'true';
+    btn.addEventListener('click', () => {
       const root = document.documentElement;
       const isDark = root.classList.toggle('dark');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
@@ -25,5 +27,8 @@
   }
 
   initThemeToggle();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThemeToggle);
+  }
   document.addEventListener('astro:page-load', initThemeToggle);
 </script>
