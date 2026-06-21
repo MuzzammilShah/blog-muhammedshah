@@ -42,13 +42,13 @@ import species from '../assets/hero/layer-03-species.png';
     if (!document.getElementById('hero')) return;
 
     const layers: { sel: string; y: number }[] = [
-      { sel: '[data-layer="02-grass"]', y: -40 },
+      { sel: '[data-layer="02-grass"]', y: -160 },
       { sel: '[data-layer="03-species"]', y: -90 },
     ];
 
     layers.forEach(({ sel, y }) => {
       gsap.to(sel, {
-        yPercent: y / 10,
+        y,
         ease: 'none',
         scrollTrigger: {
           trigger: '#hero',
