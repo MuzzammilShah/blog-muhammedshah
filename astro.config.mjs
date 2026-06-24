@@ -26,7 +26,7 @@ export default defineConfig({
   // Self-hosted at build time — swap `name` here (and the matching
   // --font-* variable in src/styles/global.css) to change typefaces.
   fonts: [
-    { provider: fontProviders.google(), name: 'Cutive', cssVariable: '--font-cutive' },
+    { provider: fontProviders.google(), name: 'Poppins', cssVariable: '--font-poppins' },
     { provider: fontProviders.google(), name: 'Instrument Sans', cssVariable: '--font-instrument-sans' }
   ]
 });

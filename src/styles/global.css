@@ -16,7 +16,7 @@
   --color-footer-fg: #ffffff;
   /* Swap typefaces here + the matching `fonts` entry in astro.config.mjs */
   --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-cutive), "Sora", sans-serif;
+  --font-display: var(--font-poppins), "Sora", sans-serif;
 }
 
 .dark {
