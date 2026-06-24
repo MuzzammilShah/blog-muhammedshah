@@ -1,0 +1,194 @@
+---
+---
+<button
+  id="search-toggle"
+  type="button"
+  aria-label="Search posts"
+  class="relative z-10 inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-(--color-fg) hover:bg-(--color-surface) focus-visible:outline focus-visible:outline-2 focus-visible:outline-(--color-accent) transition-colors"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5 [nav[data-search-open=true]_&]:hidden">
+    <circle cx="11" cy="11" r="7" />
+    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35" />
+  </svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden h-5 w-5 [nav[data-search-open=true]_&]:block">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />
+  </svg>
+</button>
+
+<div
+  id="search-bar"
+  class="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center gap-2 px-3 opacity-0 transition-opacity duration-150 [nav[data-search-open=true]_&]:pointer-events-auto [nav[data-search-open=true]_&]:opacity-100"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4 flex-shrink-0 text-(--color-muted)">
+    <circle cx="11" cy="11" r="7" />
+    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35" />
+  </svg>
+  <input
+    id="search-input"
+    type="text"
+    placeholder="Search posts…"
+    aria-label="Search posts"
+    tabindex="-1"
+    autocomplete="off"
+    class="w-full flex-1 bg-transparent text-sm text-(--color-fg) placeholder:text-(--color-muted) focus:outline-none"
+  />
+</div>
+
+<div
+  id="search-results-wrap"
+  class="absolute inset-x-0 top-[calc(100%+0.5rem)] z-50 hidden overflow-hidden rounded-2xl bg-(--color-bg)/95 shadow-lg shadow-black/5 backdrop-blur-md supports-[backdrop-filter]:bg-(--color-bg)/90"
+>
+  <div id="search-results" class="max-h-80 overflow-y-auto p-2" role="listbox"></div>
+</div>
+
+<div id="search-backdrop" class="pointer-events-none fixed inset-0 z-40"></div>
+
+<script>
+  import { searchPosts, type PostIndexEntry, type SearchResult } from '../lib/search';
+
+  let index: PostIndexEntry[] | null = null;
+  let debounceTimer: ReturnType<typeof setTimeout> | undefined;
+
+  function getEls() {
+    return {
+      nav: document.getElementById('site-nav'),
+      toggle: document.getElementById('search-toggle'),
+      input: document.getElementById('search-input') as HTMLInputElement | null,
+      results: document.getElementById('search-results'),
+      resultsWrap: document.getElementById('search-results-wrap'),
+      backdrop: document.getElementById('search-backdrop'),
+      navLinks: document.querySelector('[data-nav-links]'),
+    };
+  }
+
+  function setInert(el: Element | null, inert: boolean) {
+    if (!el) return;
+    el.querySelectorAll('a, button').forEach((node) => {
+      if (inert) {
+        node.setAttribute('aria-hidden', 'true');
+        node.setAttribute('tabindex', '-1');
+      } else {
+        node.removeAttribute('aria-hidden');
+        node.removeAttribute('tabindex');
+      }
+    });
+  }
+
+  function renderResults(results: SearchResult[], query: string) {
+    const { results: resultsEl, resultsWrap } = getEls();
+    if (!resultsEl || !resultsWrap) return;
+
+    resultsEl.innerHTML = '';
+
+    if (!query.trim()) {
+      resultsWrap.classList.add('hidden');
+      return;
+    }
+
+    if (results.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'px-3 py-4 text-center text-sm text-(--color-muted)';
+      empty.textContent = 'No matching posts.';
+      resultsEl.appendChild(empty);
+      resultsWrap.classList.remove('hidden');
+      return;
+    }
+
+    for (const result of results) {
+      const link = document.createElement('a');
+      link.href = `/posts/${result.slug}/${result.lineId ? `#${result.lineId}` : ''}`;
+      link.setAttribute('role', 'option');
+      link.className = 'block rounded-xl px-3 py-2 transition-colors hover:bg-(--color-surface)';
+
+      const title = document.createElement('p');
+      title.className = 'text-sm font-medium text-(--color-fg)';
+      title.textContent = result.title;
+      link.appendChild(title);
+
+      if (result.matchType !== 'title') {
+        const snippet = document.createElement('p');
+        snippet.className = 'mt-0.5 truncate text-xs text-(--color-muted)';
+        snippet.append(document.createTextNode(result.snippet.before));
+        const mark = document.createElement('strong');
+        mark.className = 'font-bold text-(--color-fg)';
+        mark.textContent = result.snippet.match;
+        snippet.appendChild(mark);
+        snippet.append(document.createTextNode(result.snippet.after));
+        link.appendChild(snippet);
+      }
+
+      resultsEl.appendChild(link);
+    }
+
+    resultsWrap.classList.remove('hidden');
+  }
+
+  async function ensureIndex() {
+    if (index) return index;
+    const res = await fetch('/search-index.json');
+    index = (await res.json()) as PostIndexEntry[];
+    return index;
+  }
+
+  function openSearch() {
+    const { nav, input, navLinks, backdrop } = getEls();
+    if (!nav || !input) return;
+    nav.setAttribute('data-search-open', 'true');
+    backdrop?.classList.remove('pointer-events-none');
+    setInert(navLinks, true);
+    input.removeAttribute('tabindex');
+    input.focus();
+    void ensureIndex();
+  }
+
+  function closeSearch() {
+    const { nav, input, resultsWrap, navLinks, backdrop } = getEls();
+    if (!nav || !input) return;
+
+    backdrop?.classList.add('pointer-events-none');
+    nav.removeAttribute('data-search-open');
+    setInert(navLinks, false);
+    input.value = '';
+    input.setAttribute('tabindex', '-1');
+    resultsWrap?.classList.add('hidden');
+  }
+
+  function isOpen() {
+    return getEls().nav?.getAttribute('data-search-open') === 'true';
+  }
+
+  function initSearch() {
+    const { toggle, input, backdrop } = getEls();
+    if (!toggle || toggle.dataset.bound) return;
+    toggle.dataset.bound = 'true';
+
+    toggle.addEventListener('click', () => {
+      if (isOpen()) {
+        closeSearch();
+      } else {
+        openSearch();
+      }
+    });
+
+    backdrop?.addEventListener('click', closeSearch);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) closeSearch();
+    });
+
+    input?.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      const query = input.value;
+      debounceTimer = setTimeout(async () => {
+        const idx = await ensureIndex();
+        renderResults(searchPosts(idx, query), query);
+      }, 150);
+    });
+  }
+
+  initSearch();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSearch);
+  }
+  document.addEventListener('astro:page-load', initSearch);
+</script>
