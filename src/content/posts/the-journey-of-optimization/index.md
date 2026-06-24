@@ -12,7 +12,10 @@ draft: false
 
 <div align="center" style="font-size: 0.7em; font-style: italic;">This thumbnail has nothing to do with Apple Inc. I just really liked how it shows the 'Evolution of Icons' over time, which kinda goes with the 'Optimization journey' I'm covering here. So that's that haha. Image courtesy: <a href="https://basicappleguy.com/" target="_blank" style="text-decoration: none; color: inherit;">Basic Apple Guy</a></div>
 
-# The Journey of Optimization: **Model performance**
+<br>
+<br>
+
+# Performance of Models
 
 ## Phase 1: Model Configuration
 

@@ -11,7 +11,7 @@ featured: false
 draft: false
 ---
 
-# Model Context Protocol (MCP) - An Introduction
+# An Introduction to MCP
 
 ## Basic Understanding
 

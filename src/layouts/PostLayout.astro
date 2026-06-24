@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import BaseLayout from './BaseLayout.astro';
 import PostMeta from '../components/PostMeta.astro';
 import OtherArticles from '../components/OtherArticles.astro';
+import { splitInlineCode } from '../lib/inlineCode';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -12,11 +13,14 @@ interface Props {
 
 const { post, minutesRead } = Astro.props;
 const { title, description, thumbnail, thumbnailAlt, pubDate, author, tags } = post.data;
+const titleParts = splitInlineCode(title);
 ---
 <BaseLayout title={title} description={description}>
   <article>
     <header class="mx-auto max-w-3xl px-4 pt-28 sm:px-6">
-      <h1 class="font-display text-3xl font-bold tracking-tight sm:text-5xl">{title}</h1>
+      <h1 class="font-display text-3xl font-bold tracking-tight sm:text-5xl">
+        {titleParts.map((part) => (part.code ? <code class="font-sans font-normal">{part.value}</code> : part.value))}
+      </h1>
       <PostMeta pubDate={pubDate} minutesRead={minutesRead} author={author} class="mt-4" />
       {tags.length > 0 && (
         <div class="mt-4 flex flex-wrap gap-2">

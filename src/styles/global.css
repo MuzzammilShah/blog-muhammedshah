@@ -35,6 +35,15 @@ html {
   color: var(--color-fg);
 }
 
+.prose :where(code):not(:where([class~="not-prose"] *)) {
+  font-weight: inherit;
+}
+
+.prose :where(code):not(:where([class~="not-prose"] *))::before,
+.prose :where(code):not(:where([class~="not-prose"] *))::after {
+  content: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;

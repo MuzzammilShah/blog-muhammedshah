@@ -12,7 +12,10 @@ draft: false
 
 <div align="center" style="font-size: 0.7em; font-style: italic;">The logo on this thumbnail is of the <a href="https://apps.apple.com/us/app/ds-store-cleaner/id6748859939?mt=12" target="_blank" style="text-decoration: none; color: inherit;">DS_Store cleaner app</a> from App Store for Mac. I don't use it in the tutorial below (haven't tried it yet either), but the goal is the same, so I used it here haha.</div>
 
-# How to clean up `.DS_Store` if it has already been pushed to GitHub (accidently ofcourse)
+<br>
+<br>
+
+# It happened by accident of course
 
 If you are a new Mac user like me then you might have noticed that your GitHub repo suddenly contains a new file called `.DS_Store`. It took me a while to understand what it was and how I can remove it. So without any other unnecessary detail, I have provided a set of commands to run to first remove it from your repo. After that, if you are still interested, you can read what that file is along with a simple breakdown explaining what the commands you ran actually do.
 
@@ -104,14 +107,18 @@ If you work via branches (you said you mostly work on branches and then merge to
 
 ### 🚀 **Commands you just ran**
 
-`find . -name .DS_Store -print0 | xargs -0 git rm --cached --ignore-unmatch`
+```
+find . -name .DS_Store -print0 | xargs -0 git rm --cached --ignore-unmatch
+```
 
 This command will:
 
 - Remove the already tracked `.DS_Store` files (and similar) from version control (but not from your local working directories), so they are no longer tracked and will not show up in commits or merges.
 - Find all `.DS_Store` files under the repo and remove them from the Git index (not deleting them locally).
 
-`find . -type d -name .vscode -print0 | xargs -0 git rm --cached -r --ignore-unmatch`
+```
+find . -type d -name .vscode -print0 | xargs -0 git rm --cached -r --ignore-unmatch
+```
 
 This command will:
 

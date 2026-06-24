@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import PostMeta from './PostMeta.astro';
+import { splitInlineCode } from '../lib/inlineCode';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 
 const { post } = Astro.props;
 const { title, description, thumbnail, thumbnailAlt, pubDate, author } = post.data;
+const titleParts = splitInlineCode(title);
 ---
 <a
   href={`/posts/${post.id}/`}
@@ -25,7 +27,7 @@ const { title, description, thumbnail, thumbnailAlt, pubDate, author } = post.da
   </div>
   <div class="p-5">
     <h3 class="font-display text-lg font-semibold leading-snug group-hover:text-(--color-heading-hover) transition-colors">
-      {title}
+      {titleParts.map((part) => (part.code ? <code class="font-sans font-normal">{part.value}</code> : part.value))}
     </h3>
     <p class="mt-2 line-clamp-2 text-sm text-(--color-muted)">{description}</p>
     <PostMeta pubDate={pubDate} author={author} class="mt-4" />

@@ -10,7 +10,7 @@ featured: false
 draft: false
 ---
 
-# Minecraft in 12 hours (A Reality Check)
+# It was more of a Reality Check
 
 Hello, welcome to another blog. I am currently on a holiday but I wanted to work on something fun yet new for me, which is why I thought I should code up a game! Considering how advanced AI tools have got, I thought I could go ahead and try building this popular game called MINECRAFT. Now, obviously I don't expect to make a replica of it (that would also be silly, developers spend years building that and I am not going to disrespect that by saying I am going to build that in a matter of hours). 
 
