@@ -1,40 +1,45 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
+import Search from './Search.astro';
 ---
 <header id="site-header" class="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
   <nav
-    class="flex items-center gap-1 rounded-full bg-(--color-bg)/80 px-2 py-2 shadow-lg shadow-black/5 backdrop-blur-md supports-[backdrop-filter]:bg-(--color-bg)/60"
+    id="site-nav"
+    class="relative flex items-center gap-1 rounded-full bg-(--color-bg)/80 px-2 py-2 shadow-lg shadow-black/5 backdrop-blur-md supports-[backdrop-filter]:bg-(--color-bg)/60 data-[search-open=true]:bg-(--color-bg) data-[search-open=true]:backdrop-blur-none data-[search-open=true]:supports-[backdrop-filter]:bg-(--color-bg)"
   >
-    <a
-      href="/"
-      class="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-(--color-fg) transition-colors hover:bg-(--color-surface) sm:px-4"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3 11.5 12 4l9 7.5" />
-        <path stroke-linecap="round" stroke-linejoin="round" d="M5 9.5V19a1 1 0 0 0 1 1h4v-5a2 2 0 1 1 4 0v5h4a1 1 0 0 0 1-1V9.5" />
-      </svg>
-      <span class="hidden sm:inline">Home</span>
-    </a>
-    <a
-      href="/#posts"
-      class="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-(--color-fg) transition-colors hover:bg-(--color-surface) sm:px-4"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.5c-1.2-1-3-1.5-4.5-1.5S4.2 5.3 3 6.5v12c1.2-1 3-1.5 4.5-1.5s3.3.5 4.5 1.5m0-12c1.2-1 3-1.5 4.5-1.5s3.3.5 4.5 1.5v12c-1.2-1-3-1.5-4.5-1.5s-3.3.5-4.5 1.5m0-12v12" />
-      </svg>
-      <span class="hidden sm:inline">Posts</span>
-    </a>
-    <a
-      href="/#footer"
-      class="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-(--color-fg) transition-colors hover:bg-(--color-surface) sm:px-4"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
-        <circle cx="12" cy="8" r="3.25" />
-        <path stroke-linecap="round" stroke-linejoin="round" d="M5.5 19.5a6.5 6.5 0 0 1 13 0" />
-      </svg>
-      <span class="hidden sm:inline">Reach out</span>
-    </a>
-    <div class="mx-1 h-5 w-px bg-(--color-border)"></div>
-    <ThemeToggle />
+    <div class="flex flex-1 items-center gap-1 transition-opacity duration-150 [nav[data-search-open=true]_&]:pointer-events-none [nav[data-search-open=true]_&]:opacity-0" data-nav-links>
+      <a
+        href="/"
+        class="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-(--color-fg) transition-colors hover:bg-(--color-surface) sm:px-4"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 11.5 12 4l9 7.5" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 9.5V19a1 1 0 0 0 1 1h4v-5a2 2 0 1 1 4 0v5h4a1 1 0 0 0 1-1V9.5" />
+        </svg>
+        <span class="hidden sm:inline">Home</span>
+      </a>
+      <a
+        href="/#posts"
+        class="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-(--color-fg) transition-colors hover:bg-(--color-surface) sm:px-4"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.5c-1.2-1-3-1.5-4.5-1.5S4.2 5.3 3 6.5v12c1.2-1 3-1.5 4.5-1.5s3.3.5 4.5 1.5m0-12c1.2-1 3-1.5 4.5-1.5s3.3.5 4.5 1.5v12c-1.2-1-3-1.5-4.5-1.5s-3.3.5-4.5 1.5m0-12v12" />
+        </svg>
+        <span class="hidden sm:inline">Posts</span>
+      </a>
+      <a
+        href="/#footer"
+        class="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-(--color-fg) transition-colors hover:bg-(--color-surface) sm:px-4"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+          <circle cx="12" cy="8" r="3.25" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.5 19.5a6.5 6.5 0 0 1 13 0" />
+        </svg>
+        <span class="hidden sm:inline">Reach out</span>
+      </a>
+      <div class="mx-1 h-5 w-px bg-(--color-border)"></div>
+      <ThemeToggle />
+    </div>
+    <Search />
   </nav>
 </header>

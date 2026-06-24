@@ -8,6 +8,8 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 import { remarkReadingTime } from './remark-reading-time.mjs';
+import { remarkSearchText } from './remark-search-text.mjs';
+import { rehypeSearchIds } from './rehype-search-ids.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,7 +20,8 @@ export default defineConfig({
   },
 
   markdown: {
-    remarkPlugins: [remarkReadingTime]
+    remarkPlugins: [remarkReadingTime, remarkSearchText],
+    rehypePlugins: [rehypeSearchIds]
   },
 
   integrations: [mdx(), sitemap()],

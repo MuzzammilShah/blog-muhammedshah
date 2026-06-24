@@ -51,3 +51,24 @@ html {
     scroll-behavior: auto !important;
   }
 }
+
+#site-nav {
+  max-width: 28rem;
+  transition: max-width 200ms ease;
+}
+
+#site-nav:not([data-search-open="true"]) {
+  max-width: fit-content;
+}
+
+@media (max-width: 640px) {
+  #site-nav[data-search-open="true"] {
+    max-width: calc(100vw - 2rem);
+  }
+}
+
+.search-highlight {
+  background-color: color-mix(in oklch, var(--color-accent) 35%, transparent);
+  border-radius: 0.25rem;
+  transition: background-color 1.2s ease;
+}
