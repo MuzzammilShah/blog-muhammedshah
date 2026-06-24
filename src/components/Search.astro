@@ -35,10 +35,11 @@
 </div>
 
 <div
-  id="search-results"
-  class="absolute inset-x-0 top-[calc(100%+0.5rem)] z-50 hidden max-h-80 overflow-y-auto rounded-2xl bg-(--color-bg)/95 p-2 shadow-lg shadow-black/5 backdrop-blur-md supports-[backdrop-filter]:bg-(--color-bg)/90"
-  role="listbox"
-></div>
+  id="search-results-wrap"
+  class="absolute inset-x-0 top-[calc(100%+0.5rem)] z-50 hidden overflow-hidden rounded-2xl bg-(--color-bg)/95 shadow-lg shadow-black/5 backdrop-blur-md supports-[backdrop-filter]:bg-(--color-bg)/90"
+>
+  <div id="search-results" class="max-h-80 overflow-y-auto p-2" role="listbox"></div>
+</div>
 
 <div id="search-backdrop" class="pointer-events-none fixed inset-0 z-40"></div>
 
@@ -54,6 +55,7 @@
       toggle: document.getElementById('search-toggle'),
       input: document.getElementById('search-input') as HTMLInputElement | null,
       results: document.getElementById('search-results'),
+      resultsWrap: document.getElementById('search-results-wrap'),
       backdrop: document.getElementById('search-backdrop'),
       navLinks: document.querySelector('[data-nav-links]'),
     };
@@ -73,13 +75,13 @@
   }
 
   function renderResults(results: SearchResult[], query: string) {
-    const { results: resultsEl } = getEls();
-    if (!resultsEl) return;
+    const { results: resultsEl, resultsWrap } = getEls();
+    if (!resultsEl || !resultsWrap) return;
 
     resultsEl.innerHTML = '';
 
     if (!query.trim()) {
-      resultsEl.classList.add('hidden');
+      resultsWrap.classList.add('hidden');
       return;
     }
 
@@ -88,7 +90,7 @@
       empty.className = 'px-3 py-4 text-center text-sm text-(--color-muted)';
       empty.textContent = 'No matching posts.';
       resultsEl.appendChild(empty);
-      resultsEl.classList.remove('hidden');
+      resultsWrap.classList.remove('hidden');
       return;
     }
 
@@ -118,7 +120,7 @@
       resultsEl.appendChild(link);
     }
 
-    resultsEl.classList.remove('hidden');
+    resultsWrap.classList.remove('hidden');
   }
 
   async function ensureIndex() {
@@ -140,7 +142,7 @@
   }
 
   function closeSearch() {
-    const { nav, input, results, navLinks, backdrop } = getEls();
+    const { nav, input, resultsWrap, navLinks, backdrop } = getEls();
     if (!nav || !input) return;
 
     backdrop?.classList.add('pointer-events-none');
@@ -148,7 +150,7 @@
     setInert(navLinks, false);
     input.value = '';
     input.setAttribute('tabindex', '-1');
-    results?.classList.add('hidden');
+    resultsWrap?.classList.add('hidden');
   }
 
   function isOpen() {
