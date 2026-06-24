@@ -42,18 +42,18 @@ These are the user's actions, not something a coding agent should do automatical
 
 ## Architecture
 
+The site is a single-page app at `/` plus one route per post — there is no separate posts
+listing page or pagination.
+
 ```
 src/
-├── assets/hero/            # 5 layered placeholder images for the parallax hero
-│                            # (see assets/hero/README.md — swap files in place, no code change needed)
-├── components/              # Header, Footer, ThemeToggle, HeroParallax, PostCard,
-│                            # PostMeta, Pagination, OtherArticles
+├── components/              # Header, Footer, ThemeToggle, Hero, PostsSection, PostCard,
+│                            # PostMeta, OtherArticles
 ├── content/posts/<slug>/    # one folder per post: index.md + thumbnail image
 ├── content.config.ts        # Content Layer API schema (glob loader, zod schema)
 ├── layouts/                 # BaseLayout.astro, PostLayout.astro
 ├── pages/
-│   ├── index.astro          # home: hero + featured + recent posts
-│   ├── posts/[...page].astro  # paginated posts index (6/page)
+│   ├── index.astro          # home: sticky Hero + inline, unpaginated PostsSection
 │   ├── posts/[...slug].astro  # individual article
 │   ├── rss.xml.js
 │   └── 404.astro
@@ -62,17 +62,29 @@ src/
 
 ### Adding a post
 
-Create `src/content/posts/<slug>/index.md` + a co-located thumbnail image. No other code
-changes needed — it shows up in `/posts`, RSS, sitemap, and (if `featured: true`) on the
-home page. Frontmatter schema is enforced by `src/content.config.ts` (title, description,
-pubDate, thumbnail, thumbnailAlt, author, tags, featured, draft).
+Create `src/content/posts/<slug>/index.md` + a co-located thumbnail image (1280x720,
+16:9 — rendered via `object-cover` so it's never cropped at that ratio). No other code
+changes needed — it shows up inline in the home page's "My Posts" section (newest first,
+unpaginated — cards just keep stacking), RSS, and sitemap. Frontmatter schema is enforced
+by `src/content.config.ts` (title, description, pubDate, thumbnail, thumbnailAlt, author,
+tags, featured, draft). `featured` is currently unused by any page template.
 
-### Hero parallax
+### Home page: sticky hero + inline posts
 
-`src/components/HeroParallax.astro` renders 5 stacked layers from `src/assets/hero/` and
-animates them at different scroll speeds via GSAP ScrollTrigger. Reinitializes on
-`astro:page-load` (Astro's `ClientRouter`/view-transitions). Respects
-`prefers-reduced-motion` — motion is skipped entirely, scene still renders statically.
+`src/pages/index.astro` composes `<Hero />` and `<PostsSection />` inside a single
+`position: relative` wrapper. `Hero.astro` is a plain centered text block
+("Muhammed Shah" / "Learn. Build. Share.", no imagery) set to `position: sticky; top: 0;
+height: 100dvh` — it has no JS and no scroll listeners. Because it's sticky inside that
+wrapper, it stays pinned in the viewport while `PostsSection` (which sits right below it
+with a higher `z-index` and an opaque background) scrolls upward and visually covers it,
+producing a "next section slides over the fixed hero" effect using only CSS — no GSAP
+ScrollTrigger pinning. `PostsSection.astro` queries the `posts` collection directly
+(same draft-filter/sort logic previously in the old posts listing page) and renders every
+post via `PostCard`, with `id="posts"` as the nav anchor target.
+
+Nav's "Posts" and "Reach out" links are anchors (`/#posts`, `/#footer`), not page routes —
+from an individual post page they navigate home first, then the browser jumps to the
+matching `id` once the document loads.
 
 ### Styling
 
@@ -90,9 +102,11 @@ npm run build        # static build — must succeed, must stay static (no adapt
 npm run preview      # sanity-check the production build locally
 ```
 
-For UI changes, also run `npm run dev` and manually check: home hero parallax (scroll +
-after client-side nav), posts pagination, an article page, dark/light toggle (no flash),
-and the 404 page.
+For UI changes, also run `npm run dev` and manually check: the home page's sticky-hero
+scroll effect (hero stays fixed while "My Posts" slides over it), the inline posts list
+(no pagination), an article page and its "Other articles" section, nav anchor links
+("Posts" / "Reach out" from both home and an article page), dark/light toggle including
+footer color inversion (no flash), and the 404 page.
 
 ## Known non-issues
 
