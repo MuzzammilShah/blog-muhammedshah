@@ -54,7 +54,7 @@ html {
 
 #site-nav {
   max-width: 28rem;
-  transition: max-width 200ms ease;
+  transition: max-width 200ms ease, background-color 200ms ease, backdrop-filter 200ms ease;
 }
 
 #site-nav:not([data-search-open="true"]) {

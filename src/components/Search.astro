@@ -40,10 +40,7 @@
   role="listbox"
 ></div>
 
-<div
-  id="search-backdrop"
-  class="pointer-events-none fixed inset-0 z-40 bg-black/40 opacity-0 transition-opacity duration-150"
-></div>
+<div id="search-backdrop" class="pointer-events-none fixed inset-0 z-40"></div>
 
 <script>
   import { searchPosts, type PostIndexEntry, type SearchResult } from '../lib/search';
@@ -135,10 +132,7 @@
     const { nav, input, navLinks, backdrop } = getEls();
     if (!nav || !input) return;
     nav.setAttribute('data-search-open', 'true');
-    if (backdrop) {
-      backdrop.classList.remove('pointer-events-none');
-      backdrop.classList.remove('opacity-0');
-    }
+    backdrop?.classList.remove('pointer-events-none');
     setInert(navLinks, true);
     input.removeAttribute('tabindex');
     input.focus();
@@ -149,21 +143,12 @@
     const { nav, input, results, navLinks, backdrop } = getEls();
     if (!nav || !input) return;
 
-    if (backdrop) {
-      backdrop.classList.add('opacity-0');
-      backdrop.classList.add('pointer-events-none');
-    }
+    backdrop?.classList.add('pointer-events-none');
+    nav.removeAttribute('data-search-open');
     setInert(navLinks, false);
     input.value = '';
     input.setAttribute('tabindex', '-1');
     results?.classList.add('hidden');
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      nav.removeAttribute('data-search-open');
-    } else {
-      setTimeout(() => nav.removeAttribute('data-search-open'), 150);
-    }
   }
 
   function isOpen() {
