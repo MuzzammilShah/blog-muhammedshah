@@ -1,0 +1,16 @@
+---
+import PostCard from './PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', ({ data }) => (import.meta.env.PROD ? !data.draft : true))).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+<section id="posts" class="relative z-10 min-h-screen bg-(--color-bg) px-4 py-16 sm:px-6">
+  <div class="mx-auto max-w-4xl">
+    <h2 class="font-display text-3xl font-bold tracking-tight sm:text-4xl">My Posts</h2>
+    <div class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => <PostCard post={post} />)}
+    </div>
+  </div>
+</section>

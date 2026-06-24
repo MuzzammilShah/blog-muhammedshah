@@ -12,19 +12,19 @@ const { title, description, thumbnail, thumbnailAlt, pubDate, author } = post.da
 ---
 <a
   href={`/posts/${post.id}/`}
-  class="group block overflow-hidden rounded-2xl border border-(--color-border) bg-(--color-surface) transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5"
+  class="group block overflow-hidden border border-(--color-border) bg-(--color-surface) transition-colors hover:border-(--color-fg)/30 hover:shadow-[0_0_0_1px_var(--color-fg)] hover:shadow-(--color-fg)/10"
 >
-  <div class="aspect-[16/10] overflow-hidden">
+  <div class="aspect-[16/9] overflow-hidden">
     <Image
       src={thumbnail}
       alt={thumbnailAlt}
       width={800}
-      height={500}
-      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+      height={450}
+      class="h-full w-full object-cover"
     />
   </div>
   <div class="p-5">
-    <h3 class="font-display text-lg font-semibold leading-snug group-hover:text-(--color-accent) transition-colors">
+    <h3 class="font-display text-lg font-semibold leading-snug group-hover:text-(--color-heading-hover) transition-colors">
       {title}
     </h3>
     <p class="mt-2 line-clamp-2 text-sm text-(--color-muted)">{description}</p>

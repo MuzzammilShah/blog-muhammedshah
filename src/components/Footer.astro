@@ -1,54 +1,70 @@
 ---
 const year = new Date().getFullYear();
+
+const socials = [
+  {
+    label: 'Website',
+    href: 'https://muhammedshah.com/',
+    icon: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3 12h18M12 3a13.6 13.6 0 0 1 0 18 13.6 13.6 0 0 1 0-18Z',
+    stroke: true,
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/MuzzammilShah',
+    icon: 'M12 2C6.48 2 2 6.58 2 12.25c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.49 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.2-3.37-1.2-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.36 1.11 2.93.85.09-.66.34-1.11.62-1.37-2.22-.26-4.55-1.13-4.55-5.03 0-1.11.39-2.02 1.03-2.73-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.43.2 2.49.1 2.75.64.71 1.03 1.62 1.03 2.73 0 3.91-2.34 4.77-4.57 5.02.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.81 0 .27.18.6.69.49C19.14 20.56 22 16.74 22 12.25 22 6.58 17.52 2 12 2Z',
+    stroke: false,
+  },
+  {
+    label: 'X',
+    href: 'https://x.com/MoShahx07',
+    icon: 'M18.9 3H22l-7.2 8.2L22.6 21h-6.2l-5-6.4L5.6 21H2.4l7.7-8.8L2 3h6.3l4.5 5.9L18.9 3Zm-2.2 16h1.7L7.4 5h-1.8l11.1 14Z',
+    stroke: false,
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/muhammed-shah/',
+    icon: 'M6.94 6.5a1.94 1.94 0 1 1 0-3.88 1.94 1.94 0 0 1 0 3.88ZM5 8.75h3.88V21H5V8.75Zm6.5 0h3.72v1.68h.05c.52-.98 1.79-2 3.68-2 3.94 0 4.67 2.59 4.67 5.96V21h-3.88v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V21H11.5V8.75Z',
+    stroke: false,
+  },
+  {
+    label: 'Email',
+    href: 'mailto:muhammed.muzzammilshah@gmail.com',
+    icon: 'M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Zm-0.5 0.8 7.6 5.7a1.6 1.6 0 0 0 1.8 0l7.6-5.7',
+    stroke: true,
+  },
+];
 ---
-<footer class="border-t border-(--color-border) mt-16">
-  <div class="mx-auto flex max-w-4xl flex-col items-center justify-between gap-3 px-4 py-8 text-sm text-(--color-muted) sm:flex-row sm:px-6">
-    <p>&copy; {year} Muhammed Shah. All rights reserved.</p>
-    <div class="flex items-center gap-4">
-      <a
-        href="mailto:muhammed.muzzammilshah@gmail.com"
-        aria-label="Email"
-        class="flex h-5 w-5 items-center justify-center hover:text-(--color-accent) transition-colors"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="m3.5 6.8 7.6 5.7a1.6 1.6 0 0 0 1.8 0l7.6-5.7" />
-        </svg>
-      </a>
-      <a
-        href="https://x.com/MoShahx07"
-        aria-label="X (Twitter)"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex h-5 w-5 items-center justify-center hover:text-(--color-accent) transition-colors"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
-          <path d="M18.9 3H22l-7.2 8.2L22.6 21h-6.2l-5-6.4L5.6 21H2.4l7.7-8.8L2 3h6.3l4.5 5.9L18.9 3Zm-2.2 16h1.7L7.4 5h-1.8l11.1 14Z" />
-        </svg>
-      </a>
-      <a
-        href="https://www.linkedin.com/in/muhammed-shah/"
-        aria-label="LinkedIn"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex h-5 w-5 items-center justify-center hover:text-(--color-accent) transition-colors"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
-          <path d="M6.94 6.5a1.94 1.94 0 1 1 0-3.88 1.94 1.94 0 0 1 0 3.88ZM5 8.75h3.88V21H5V8.75Zm6.5 0h3.72v1.68h.05c.52-.98 1.79-2 3.68-2 3.94 0 4.67 2.59 4.67 5.96V21h-3.88v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V21H11.5V8.75Z" />
-        </svg>
-      </a>
-      <a
-        href="https://muhammedshah.com/"
-        aria-label="Personal website"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex h-5 w-5 items-center justify-center hover:text-(--color-accent) transition-colors"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5">
-          <circle cx="12" cy="12" r="9" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M12 3a13.6 13.6 0 0 1 0 18 13.6 13.6 0 0 1 0-18Z" />
-        </svg>
-      </a>
+<footer id="footer" class="mt-16 bg-(--color-footer-bg) text-(--color-footer-fg)">
+  <div class="mx-auto grid max-w-5xl gap-10 px-6 py-16 text-center sm:px-8 sm:text-left sm:grid-cols-2">
+    <div>
+      <h2 class="font-display text-2xl font-bold tracking-tight sm:text-3xl">Muhammed Shah</h2>
+      <p class="mt-2 font-sans text-base text-(--color-footer-fg)/70">Learn. Build. Share.</p>
+    </div>
+    <div class="grid grid-cols-3 gap-2 sm:flex sm:flex-col sm:items-end">
+      {socials.map((social) => (
+        <a
+          href={social.href}
+          aria-label={social.label}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center gap-2 border border-(--color-footer-fg)/20 px-3 py-2.5 text-sm font-medium transition-colors hover:bg-(--color-footer-fg)/10 sm:w-48 sm:justify-start sm:gap-3 sm:px-4"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill={social.stroke ? 'none' : 'currentColor'}
+            stroke={social.stroke ? 'currentColor' : 'none'}
+            stroke-width={social.stroke ? '2' : undefined}
+            class="h-4 w-4 flex-shrink-0"
+          >
+            <path d={social.icon} stroke-linecap={social.stroke ? 'round' : undefined} stroke-linejoin={social.stroke ? 'round' : undefined} />
+          </svg>
+          <span>{social.label}</span>
+        </a>
+      ))}
     </div>
   </div>
+  <p class="border-t border-(--color-footer-fg)/10 py-6 text-center text-xs text-(--color-footer-fg)/60">
+    &copy; {year} Muhammed Shah. All rights reserved.
+  </p>
 </footer>
