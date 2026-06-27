@@ -138,6 +138,22 @@ scrollable and `overflow-hidden`-rounded. A `fixed inset-0` backdrop div closes 
 click but is fully transparent (no dimming) — it exists only for the click-outside-to-close
 behavior, not for visual effect.
 
+While search is open, `<html>` and `<body>` both get a `search-locked` class
+(`global.css`) that sets `position: fixed` + `overflow: hidden` on `body` and `overflow:
+hidden` on `html` — locking on `body` alone isn't enough because mobile browsers can route
+touch-scroll through `<html>` instead, bypassing a body-only lock. `openSearch()`/
+`closeSearch()` (`Search.astro`) also save/restore `window.scrollY` (via `body.style.top`)
+so the page doesn't jump, and add/remove a `touchmove` listener that calls
+`preventDefault()` for touches outside `#search-results-wrap` — `overflow:
+hidden`/`position: fixed` alone is known to be unreliable for blocking touch-scroll on
+mobile Safari/Chrome, so the listener is a required fallback, not redundant. The lock is
+applied *before* `input.focus()` in `openSearch()`, since focusing on mobile opens the
+keyboard and can trigger the browser's own scroll-into-view before the lock would
+otherwise engage. Each result `<a>` also calls `closeSearch()` on click before navigating
+— without it, the lock classes survive into the destination page (Astro's `<ClientRouter
+/>` does a soft navigation) and scrolling stays broken there until search is reopened and
+closed again.
+
 Clicking a line-match result navigates to `/posts/<slug>/#search-N`. An inline script in
 `PostLayout.astro` checks `location.hash` on load (`astro:page-load` + `hashchange`, the
 same idempotent-init pattern `ThemeToggle.astro` uses to survive Astro's `<ClientRouter />`
