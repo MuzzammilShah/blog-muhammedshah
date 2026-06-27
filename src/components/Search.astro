@@ -132,19 +132,28 @@
 
   let savedScrollY = 0;
 
+  function preventBodyTouchMove(e: TouchEvent) {
+    const { resultsWrap } = getEls();
+    if (resultsWrap && e.target instanceof Node && resultsWrap.contains(e.target)) return;
+    e.preventDefault();
+  }
+
   function openSearch() {
     const { nav, input, navLinks, backdrop } = getEls();
     if (!nav || !input) return;
+
+    savedScrollY = window.scrollY;
+    document.body.style.top = `-${savedScrollY}px`;
+    document.documentElement.classList.add('search-locked');
+    document.body.classList.add('search-locked');
+    document.addEventListener('touchmove', preventBodyTouchMove, { passive: false });
+
     nav.setAttribute('data-search-open', 'true');
     backdrop?.classList.remove('pointer-events-none');
     setInert(navLinks, true);
     input.removeAttribute('tabindex');
     input.focus();
     void ensureIndex();
-
-    savedScrollY = window.scrollY;
-    document.body.style.top = `-${savedScrollY}px`;
-    document.body.classList.add('search-locked');
   }
 
   function closeSearch() {
@@ -158,8 +167,10 @@
     input.setAttribute('tabindex', '-1');
     resultsWrap?.classList.add('hidden');
 
+    document.documentElement.classList.remove('search-locked');
     document.body.classList.remove('search-locked');
     document.body.style.top = '';
+    document.removeEventListener('touchmove', preventBodyTouchMove);
     window.scrollTo(0, savedScrollY);
   }
 

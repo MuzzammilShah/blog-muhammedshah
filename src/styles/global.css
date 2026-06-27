@@ -73,9 +73,13 @@ html {
   transition: background-color 1.2s ease;
 }
 
+html.search-locked,
+html.search-locked body {
+  overflow: hidden;
+}
+
 body.search-locked {
   position: fixed;
   inset: 0;
   width: 100%;
-  overflow: hidden;
 }
