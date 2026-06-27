@@ -1,6 +1,6 @@
 ---
 title: "Cleaning up `.DS_Store` on MacOS"
-description: "How to remove .DS_Store files that have already been pushed to GitHub, plus a breakdown of what the file is and how to prevent it from happening again with a global gitignore."
+description: "How to remove .DS_Store files from GitHub for good."
 pubDate: 2025-11-14
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "Cleaning up .DS_Store on MacOS thumbnail"

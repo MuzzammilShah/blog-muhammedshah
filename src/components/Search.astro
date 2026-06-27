@@ -30,7 +30,7 @@
     aria-label="Search posts"
     tabindex="-1"
     autocomplete="off"
-    class="w-full flex-1 bg-transparent text-sm text-(--color-fg) placeholder:text-(--color-muted) focus:outline-none"
+    class="w-full flex-1 bg-transparent text-base text-(--color-fg) placeholder:text-(--color-muted) focus:outline-none"
   />
 </div>
 
@@ -130,6 +130,8 @@
     return index;
   }
 
+  let savedScrollY = 0;
+
   function openSearch() {
     const { nav, input, navLinks, backdrop } = getEls();
     if (!nav || !input) return;
@@ -139,6 +141,10 @@
     input.removeAttribute('tabindex');
     input.focus();
     void ensureIndex();
+
+    savedScrollY = window.scrollY;
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.classList.add('search-locked');
   }
 
   function closeSearch() {
@@ -151,6 +157,10 @@
     input.value = '';
     input.setAttribute('tabindex', '-1');
     resultsWrap?.classList.add('hidden');
+
+    document.body.classList.remove('search-locked');
+    document.body.style.top = '';
+    window.scrollTo(0, savedScrollY);
   }
 
   function isOpen() {

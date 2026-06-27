@@ -72,3 +72,10 @@ html {
   border-radius: 0.25rem;
   transition: background-color 1.2s ease;
 }
+
+body.search-locked {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  overflow: hidden;
+}

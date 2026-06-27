@@ -1,6 +1,6 @@
 ---
 title: "Minecraft in 12 hours"
-description: "A holiday side project: building a tiny Minecraft-like world in Python with the Ursina engine — blocks, terrain, trees, and a healthy dose of reality-checking along the way."
+description: "Building a tiny Minecraft-like world in Python."
 pubDate: 2025-12-25
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "Minecraft in 12 hours thumbnail"

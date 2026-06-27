@@ -1,6 +1,6 @@
 ---
 title: "Windows Subsystem for Linux"
-description: "Setting up Docker Desktop with WSL 2 on Windows — why Docker needs a Linux kernel, a step-by-step walkthrough, and how it gets you to the same Claude Desktop + MCP Toolkit setup as on macOS."
+description: "Setting up Docker Desktop with WSL 2 on Windows."
 pubDate: 2025-12-03
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "Windows Subsystem for Linux thumbnail"
