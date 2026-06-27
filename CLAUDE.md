@@ -67,6 +67,12 @@ rehype-search-ids.mjs        # repo root — see Search below
 
 ### Adding a post
 
+**Whenever the user provides a new post draft (markdown + images) to add to the blog,
+read and follow `new-post-instructions.md` (repo root) first** — it's the full checklist
+for slug/title naming, `.md` vs `.mdx` (embedded tweets), frontmatter, thumbnail caption,
+body image placement (`public/post-images/<slug>/`) and styling, code block/backtick
+conventions, and verification steps. The summary below is just the shape of the result.
+
 Create `src/content/posts/<slug>/index.md` + a co-located thumbnail image (1280x720,
 16:9 — rendered via `object-cover` so it's never cropped at that ratio). No other code
 changes needed — it shows up inline in the home page's "My Posts" section (newest first,
