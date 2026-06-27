@@ -1,6 +1,6 @@
 ---
 title: "Model Context Protocol"
-description: "An introduction to the Model Context Protocol (MCP) — what it is, how its client-server architecture works, and how tools, resources, and prompts fit together."
+description: "An introduction to the Model Context Protocol (MCP)."
 pubDate: 2025-09-01
 updatedDate: 2025-09-06
 thumbnail: "./thumbnail.png"

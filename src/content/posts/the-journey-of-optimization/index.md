@@ -1,6 +1,6 @@
 ---
 title: "The Journey of Optimization"
-description: "Notes from optimizing a self-hosted LLM setup — keeping models warm, quantization tradeoffs on limited VRAM, and the configuration changes that finally got accurate answers out of web search + RAG."
+description: "Notes from optimizing a self-hosted LLM setup."
 pubDate: 2025-10-07
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "The Journey of Optimization thumbnail"

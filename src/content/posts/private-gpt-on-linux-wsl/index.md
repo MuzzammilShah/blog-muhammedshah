@@ -1,6 +1,6 @@
 ---
 title: "Private GPT on Linux/WSL"
-description: "Setting up a self-hosted ChatGPT alternative with Ollama and Open WebUI on Linux/WSL — installation, oAuth, OneDrive integration, and the lessons learned along the way."
+description: "A self-hosted ChatGPT alternative with Ollama on WSL."
 pubDate: 2025-10-01
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "Private GPT on Linux/WSL thumbnail"

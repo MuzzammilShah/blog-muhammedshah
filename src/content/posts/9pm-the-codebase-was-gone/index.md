@@ -1,6 +1,6 @@
 ---
 title: "9 PM: The Codebase Was Gone"
-description: "A late-night auto-deployment script taught me the hard way why environment isolation isn't optional."
+description: "Why environment isolation isn't optional."
 pubDate: 2026-06-27
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "9 PM: The Codebase Was Gone thumbnail"
@@ -10,7 +10,7 @@ featured: false
 draft: false
 ---
 
-<div align="center" style="font-size: 0.7em; font-style: italic;">Generated using Gemini Nano Banana 3 model with a custom prompt.</div>
+<div align="center" style="font-size: 0.7em; font-style: italic;">Generated using Gemini Nano Banana 2 model with a custom prompt. Inspiration: The Social Network (2010 film).</div>
 
 <br>
 <br>

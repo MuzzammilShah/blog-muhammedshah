@@ -55,6 +55,9 @@ draft: false                 # set true only if explicitly asked to stage withou
 
 - `description` should be a genuinely short, one-sentence summary the user would write
   themselves — not a copy-paste of the first paragraph.
+- Keep `description` to **~50 characters**. It renders in the home page's "My Posts" card
+  stack (`PostCard.astro`, `line-clamp-2`) at a fixed card width — anything longer gets
+  visually cropped. Count it as you write it; don't rely on a word-count guess.
 - `updatedDate` is optional; only add it later if the post is revised after publishing.
 
 ## 4. Thumbnail
