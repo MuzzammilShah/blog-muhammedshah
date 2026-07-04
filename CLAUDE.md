@@ -22,23 +22,15 @@ A static, content-driven blog built with **Astro 6** and **Tailwind CSS v4**. Ou
 - DNS uses a single **CNAME** record (`blog` → `<github-username>.github.io`), not the
   four-A-record apex setup.
 - `.github/workflows/deploy.yml` builds with `withastro/action@v6` and deploys via
-  `actions/deploy-pages@v4`. **The `push: branches: [main]` trigger is currently commented
-  out** — only `workflow_dispatch` (manual trigger from the Actions tab) is active, so
-  pushing to `main` does NOT auto-deploy yet. Uncomment those two lines when ready to go
-  live with auto-deploy on every push to main.
+  `actions/deploy-pages@v4`. The `push: branches: [main]` trigger is **active**, so
+  pushing to `main` auto-deploys.
 
-### Still to be done by the user (not yet done)
+### Deployment status
 
-These are the user's actions, not something a coding agent should do automatically:
-
-1. **GitHub repo**: already created and code is being pushed there. Pages source still
-   needs to be set to **GitHub Actions** in Settings → Pages → Build and deployment.
-2. **Custom domain in GitHub Pages**: Settings → Pages → Custom domain → enter
-   `blog.muhammedshah.com` → Save, then enable "Enforce HTTPS" once the cert provisions.
-3. **DNS at the registrar**: add the CNAME record described above. Not done as of the
-   last check-in.
-4. **Re-enable the push-trigger** in `deploy.yml` (uncomment the two lines) once happy
-   with local development and ready to go live with auto-deploy.
+The site is **fully set up and live**: GitHub Pages source is set to GitHub Actions, the
+custom domain `blog.muhammedshah.com` is configured with HTTPS enforced, DNS (CNAME record)
+is live at the registrar, and `deploy.yml` auto-deploys on every push to `main`. No
+outstanding deployment setup remains.
 
 ## Architecture
 
