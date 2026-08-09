@@ -6,7 +6,7 @@ updatedDate: 2025-09-06
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "Model Context Protocol thumbnail"
 author: "Muhammed Shah"
-tags: ["MCP"]
+tags: ["MCP", "Deeplearning.AI Course", "Technical Blog"]
 featured: false
 draft: false
 ---

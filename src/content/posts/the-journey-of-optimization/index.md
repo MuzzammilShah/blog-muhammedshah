@@ -5,7 +5,7 @@ pubDate: 2025-10-07
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "The Journey of Optimization thumbnail"
 author: "Muhammed Shah"
-tags: ["GPTs and LLMs"]
+tags: ["GPT", "LLM", "Chat Interface", "Open WEBUI", "DevOps", "MLOps", "Technical Blog"]
 featured: false
 draft: false
 ---

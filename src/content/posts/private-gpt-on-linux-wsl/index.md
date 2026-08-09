@@ -5,7 +5,7 @@ pubDate: 2025-10-01
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "Private GPT on Linux/WSL thumbnail"
 author: "Muhammed Shah"
-tags: ["GPTs and LLMs"]
+tags: ["GPT", "LLM", "Chat Interface", "Open WEBUI", "WSL", "DevOps", "Tutorial", "Technical Blog"]
 featured: false
 draft: false
 ---

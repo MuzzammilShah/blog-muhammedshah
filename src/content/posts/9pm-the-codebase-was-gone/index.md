@@ -5,7 +5,7 @@ pubDate: 2026-06-27
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "9 PM: The Codebase Was Gone thumbnail"
 author: "Muhammed Shah"
-tags: ["MISC"]
+tags: ["DevOps", "Software Architecture", "Automation", "Personal Blog"]
 featured: false
 draft: false
 ---
