@@ -27,6 +27,14 @@ const ogImage = image ? new URL(image, Astro.site).toString() : undefined;
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title={siteName} href="/rss.xml" />
 
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Mo Shah Blog" />
+    <meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#22232b" media="(prefers-color-scheme: dark)" />
+
     <Font cssVariable="--font-poppins" preload />
     <Font cssVariable="--font-instrument-sans" preload />
 
