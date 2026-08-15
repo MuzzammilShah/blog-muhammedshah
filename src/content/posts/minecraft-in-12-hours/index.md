@@ -5,7 +5,7 @@ pubDate: 2025-12-25
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "Minecraft in 12 hours thumbnail"
 author: "Muhammed Shah"
-tags: ["MISC"]
+tags: ["Game Development", "Personal Blog"]
 featured: false
 draft: false
 ---

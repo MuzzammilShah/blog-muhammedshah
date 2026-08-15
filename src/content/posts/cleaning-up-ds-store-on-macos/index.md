@@ -5,7 +5,7 @@ pubDate: 2025-11-14
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "Cleaning up .DS_Store on MacOS thumbnail"
 author: "Muhammed Shah"
-tags: ["MISC"]
+tags: ["MacOS", "Tutorial"]
 featured: false
 draft: false
 ---

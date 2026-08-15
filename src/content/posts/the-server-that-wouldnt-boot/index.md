@@ -5,7 +5,7 @@ pubDate: 2026-07-15
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "The Server That Wouldn't Boot thumbnail"
 author: "Muhammed Shah"
-tags: ["MISC"]
+tags: ["DevOps", "Data Centers", "Personal Blog"]
 featured: false
 draft: false
 ---

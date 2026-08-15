@@ -5,7 +5,7 @@ pubDate: 2025-12-03
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "Windows Subsystem for Linux thumbnail"
 author: "Muhammed Shah"
-tags: ["MISC", "wsl"]
+tags: ["WSL", "Docker", "DevOps", "Tutorial", "Technical Blog"]
 featured: false
 draft: false
 ---

@@ -5,7 +5,7 @@ pubDate: 2026-07-04
 thumbnail: "./thumbnail.png"
 thumbnailAlt: "Building a Zero-Downtime Deployment Pipeline thumbnail"
 author: "Muhammed Shah"
-tags: ["DevOps"]
+tags: ["DevOps", "Personal Blog"]
 featured: false
 draft: false
 ---
