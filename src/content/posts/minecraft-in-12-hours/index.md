@@ -18,6 +18,10 @@ Having said that, I am only going to work on this for the next few hours as this
 
 Anyway, let's just get to it.
 
+<br>
+
+<div class="ai-badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9L12 2z"/></svg>Co-authored with AI</div>
+
 ## 12-hour marathon starts, reality check kicking in
 
 Okay so I have chosen my tech stack using which I want to build this project - Python and **Ursina Engine**. Turns out it needed at least `3.12+` version of Python (I have been primarily using `3.11.9` for all of my projects), so I got that additional version added and the virtual environment created.

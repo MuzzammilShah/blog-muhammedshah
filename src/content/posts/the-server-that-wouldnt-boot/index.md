@@ -15,6 +15,8 @@ draft: false
 <br>
 <br>
 
+<div class="ai-badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9L12 2z"/></svg>Co-authored with AI</div>
+
 # A Windows Server installation that became a lesson in hardware, patience, and knowing when to escalate
 
 When I first sat down in front of our Dell PowerEdge R740, the task sounded simple: install Windows Server 2025 on the NVMe drive and keep the 2 TB RAID volume for data.

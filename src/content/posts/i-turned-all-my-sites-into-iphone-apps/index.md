@@ -15,6 +15,8 @@ draft: false
 <br>
 <br>
 
+<div class="ai-badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9L12 2z"/></svg>Co-authored with AI</div>
+
 # Because iOS just makes everything look better
 
 Small confession: I just wanted to see my own stuff on my home screen. That's it. That's the whole motivation. I have a portfolio, a blog, a chat AI persona of myself, and a docs site for my AI learning notes — and every time I opened any of them, it was just another Safari tab buried in a pile of other tabs. I wanted a little icon. I wanted to tap it like a real app.

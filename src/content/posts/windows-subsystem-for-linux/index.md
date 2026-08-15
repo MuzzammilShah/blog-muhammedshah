@@ -28,7 +28,7 @@ So this time I put in all the lessons I had from my previous experience and had 
 
 ## Why are we doing this?
 
-The final aim is to be able to try out Docker's MCP Toolkit with Claude Desktop as my Client. I have already covered how to set those up on macOS in my [previous blog]( https://docs.muhammedshah.com/blog/2025/11/13/model-context-protocol-hands-on/). Now, in order to use Docker on Windows it needs to have WSL underneath (will explain more on this). While it's more straightforward to do this on an Ubuntu machine, Claude Desktop still doesn't officially support Linux. Therefore the only option was to set up WSL so Docker runs smoothly and we can have the same environment as we did on macOS.
+The final aim is to be able to try out Docker's MCP Toolkit with Claude Desktop as my Client. I have already covered how to set those up on macOS in my [previous blog](https://blog.muhammedshah.com/posts/model-context-protocol-hands-on/). Now, in order to use Docker on Windows it needs to have WSL underneath (will explain more on this). While it's more straightforward to do this on an Ubuntu machine, Claude Desktop still doesn't officially support Linux. Therefore the only option was to set up WSL so Docker runs smoothly and we can have the same environment as we did on macOS.
 
 ### What Docker Desktop does under the hood on Windows
 
