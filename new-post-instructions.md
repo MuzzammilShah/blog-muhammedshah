@@ -127,6 +127,22 @@ each adjacent group) into this div + img + caption pattern:
   Note text here.
   </div>
   ```
+- A **"Co-authored with AI" badge** marks a section (or the whole post) as written with AI
+  assistance — a blue gradient pill, white sparkle icon + text, defined once as `.ai-badge`
+  in `src/styles/global.css`. Same in light/dark theme, slightly smaller on mobile. Drop it
+  on its own line directly before the heading/paragraph it applies to, exactly as written
+  below — **must be a `<div>`, all on one line, not a `<span>`**. `div` is a CommonMark
+  "HTML block" tag, so it's always parsed as its own standalone block regardless of what
+  precedes it on the page; `span` isn't on that tag list, so depending on the preceding
+  markup (e.g. sitting right after `<br>` lines instead of another block-level tag like
+  `<div>`), CommonMark can fall back to inline parsing and wrap it in a `<p>` — which makes
+  the search-indexing plugins (`remark-search-text.mjs`/`rehype-search-ids.mjs`, which match
+  `paragraph`/`p` nodes) capture the badge's raw HTML source as a fake, ugly search result.
+  Using `<div>` (block display is unaffected — the badge's own CSS is `display:
+  inline-flex`) avoids the whole failure mode instead of depending on surrounding context:
+  ```html
+  <div class="ai-badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9L12 2z"/></svg>Co-authored with AI</div>
+  ```
 - Preserve the draft author's voice and structure — this is light formatting/structuring
   work, not a rewrite. Don't add headings, sections, or commentary that weren't in the
   original draft unless the user asks.

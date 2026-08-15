@@ -15,6 +15,8 @@ draft: false
 <br>
 <br>
 
+<div class="ai-badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9L12 2z"/></svg>Co-authored with AI</div>
+
 # From Manual SSH Deploys to Zero‑Downtime Auto‑Deployment: A Practical Playbook
 
 Most "how we deploy" posts skip the messy middle part — the days of SSH-ing in, running `npm run build` by hand, and praying nginx reloads cleanly. This post walks through that whole arc, using [Chat AI](https://chat.muhammedshah.com)'s real deployment history as the worked example. The pattern itself — **self-hosted runner + systemd + nginx + atomic symlink releases** — generalizes to almost any small-to-mid FastAPI/Node/React app that doesn't need Kubernetes.

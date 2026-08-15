@@ -83,3 +83,39 @@ body.search-locked {
   inset: 0;
   width: 100%;
 }
+
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #7DD3FC, #2563EB, #1E3A8A);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.45rem 1rem;
+  line-height: 1;
+  margin-bottom: 1.25rem;
+}
+
+.ai-badge svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  display: block;
+  position: relative;
+  top: 0.12em;
+}
+
+@media (max-width: 640px) {
+  .ai-badge {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    gap: 0.2em;
+  }
+
+  .ai-badge svg {
+    width: 15px;
+    height: 15px;
+  }
+}
