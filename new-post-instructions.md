@@ -21,7 +21,6 @@ file just summarizes the pattern.
 - Default to **`.md`**.
 - Use **`.mdx`** only if the post embeds something that needs raw HTML/script tags that
   plain Astro Markdown won't render as-is — in practice, **embedded tweets**. See
-  `src/content/posts/agentic-ai/index.mdx` and
   `src/content/posts/model-context-protocol-hands-on/index.mdx` for the working pattern:
   ```html
   <blockquote class="twitter-tweet">
@@ -84,7 +83,7 @@ draft: false                 # set true only if explicitly asked to stage withou
 Body images do **not** live in the post's content directory — they go in
 `public/post-images/<slug>/` and are referenced with **absolute paths**
 (`/post-images/<slug>/filename.png`), not relative ones. This is the convention used by
-`minecraft-in-12-hours` and `agentic-ai`.
+`minecraft-in-12-hours`.
 
 If the draft has plain markdown images (`![alt](images/foo.png)`), convert each one (or
 each adjacent group) into this div + img + caption pattern:
