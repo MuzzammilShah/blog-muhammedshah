@@ -1,0 +1,83 @@
+---
+title: "When AI Agents Lost Track of Each Other"
+description: "A false alarm that exposed a multi-agent flaw."
+pubDate: 2026-10-31
+thumbnail: "./thumbnail.png"
+thumbnailAlt: "When AI Agents Lost Track of Each Other thumbnail"
+author: "Muhammed Shah"
+tags: ["AI Agents", "Coding Agents", "Personal Blog"]
+featured: false
+draft: false
+---
+
+<div align="center" style="font-size: 0.7em; font-style: italic;">Generated using Gemini Nano Banana 2 model with a custom prompt. Inspiration: Avengers: Infinity War (2018 film).</div>
+
+<br />
+<br />
+
+<div class="ai-badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9L12 2z"/></svg>Co-authored with AI</div>
+
+# The incident, the false alarm, and a better-connected agent
+
+A month or two ago, I ran into something rather unusual during a coding session with Claude Code.
+
+I was working with multiple subagents, each handling a different part of a code review. The idea was fairly straightforward: a parent agent would delegate tasks to its child agents, collect their findings, and eventually bring everything together into one final report.
+
+Except things didn't quite go to plan.
+
+<div align="center">
+<img src="/post-images/when-ai-agents-lost-track-of-each-other/image-1.png" alt="Agent message warning that a sender impersonating 'general-purpose' repeatedly tried to redirect background review agents, flagged as an external prompt-injection attempt" width="80%" style="border: 1px solid #e0e0e0; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+</div>
+
+<div align="center" style="font-size: 0.7em; font-style: italic;">The first heads-up: the agents flag a "general-purpose" sender as a possible prompt injection.</div>
+
+I started noticing repeated requests from the agents, particularly commands that had already been attempted or that seemed unnecessary given the progress we'd made. I stepped in and denied them, making it clear that we already had the information we needed and there was no reason to repeat those operations.
+
+That's when things got interesting.
+
+<div align="center">
+<img src="/post-images/when-ai-agents-lost-track-of-each-other/image-3.png" alt="Agent message confirming the same injection pattern: an unreachable 'general-purpose' sender tried to get another background agent to run git commands, and it was declined" width="80%" style="border: 1px solid #e0e0e0; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+</div>
+
+<div align="center" style="font-size: 0.7em; font-style: italic;">The same "injection pattern" shows up again, and the request is declined.</div>
+
+The agents started flagging messages from what appeared to be their parent agent as potential prompt-injection attempts. Apparently, they didn't recognise the sender and became suspicious of the instructions they were receiving. The main agent also raised concerns about an external entity attempting to interfere with the session.
+
+<div align="center">
+<img src="/post-images/when-ai-agents-lost-track-of-each-other/image-2.png" alt="Denied git fetch command followed by the agent noting it never verified any findings, and that any summary likely came from another session that messaged in" width="80%" style="border: 1px solid #e0e0e0; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+</div>
+
+<div align="center" style="font-size: 0.7em; font-style: italic;">After a denied git fetch, the main agent suspects the summary came from "the other session that messaged in".</div>
+
+Naturally, I took that seriously. I stopped the repeated operations and started investigating what had actually happened.
+
+After going through the session logs, agent transcripts and a few community discussions (I've embedded one of the discussions below), I eventually found the culprit. It wasn't an external attacker. It was an orchestration issue.
+
+The parent agent was spawning multiple child agents, but their completion notifications were incorrectly making their way back to the main conversation instead of the parent that had spawned them. On top of that, some messages were losing their proper sender identity and appearing under a generic agent name.
+
+In other words, the children weren't necessarily losing their parent altogether. The underlying task relationships were there, but the communication and routing weren't working as they should. The parent couldn't reliably collect the results, kept checking in with its children, and those legitimate follow-up messages were being interpreted as suspicious instructions.
+
+A rather interesting false positive, if you ask me!
+
+<blockquote class="twitter-tweet">
+  <a href="https://twitter.com/MoShahx07/status/2092155122675847570?s=20"></a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+**A few weeks later, things got better.**
+
+An updated coding agent introduced much better visibility into the agent hierarchy and how the different agents interact. Instead of having multiple agents working behind the scenes with very little visibility into their relationships, there's now a much clearer connection graph.
+
+<div align="center">
+<img src="/post-images/when-ai-agents-lost-track-of-each-other/image-4.png" alt="Agent map showing one parent agent, 'Codebase exploration and documentation', connected to three child agents mapping the backend, frontend, and test bed/CI tooling, each with run time and token counts" width="80%" style="border: 1px solid #e0e0e0; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+</div>
+
+<div align="center" style="font-size: 0.7em; font-style: italic;">The agent map: one parent coordinating three child agents, with per-agent token usage.</div>
+
+You can see the parent agent, its child agents, the individual tasks they're working on, and how they're connected. There's also visibility into their token consumption, making it easier to understand where the work is happening and how resources are being used.
+
+The difference is quite nice to see. In the example above, one parent agent is coordinating three child agents, each working on its own assigned task. The hierarchy and relationships are visible rather than being left entirely to the orchestration layer.
+
+It's a small but meaningful improvement. When you're working with multiple agents, it's not enough for them to simply execute tasks in parallel. They also need to understand where they fit in the bigger picture, who they're reporting to, and where their results need to go.
+
+Because sometimes, the biggest issue isn't what the agents are doing. It's whether they're actually talking to the right people. :)

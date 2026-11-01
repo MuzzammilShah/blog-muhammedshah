@@ -31,6 +31,8 @@ file just summarizes the pattern.
   Ask the user for the tweet URL/status ID if they want one embedded but haven't supplied
   it. The `<script>` tag is what forces `.mdx` (the `@astrojs/mdx` integration is already
   registered in `astro.config.mjs`) — don't add it to a `.md` file.
+- In `.mdx`, void tags must be self-closed (`<img ... />`, `<br />`) — MDX parses HTML as
+  JSX, and an unclosed `<img ...>` fails the build.
 
 ## 3. Frontmatter
 
